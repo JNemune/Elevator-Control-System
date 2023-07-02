@@ -1,7 +1,7 @@
+from functools import partial
 from tkinter import *
 
 from State import State
-from functools import partial
 
 
 class UI:
@@ -65,7 +65,7 @@ class UI:
                 self.WIDTH * (i_ + 1) + self.WIDTH // self.WIDTH_E,
                 self.HEIGHT * (self.flr - i) + self.HEIGHT // self.HEIGHT_E,
             )
-        for i in self.state.main_state:
+        for i in self.state.waiting_list:
             canvas.create_oval(
                 self.WIDTH * (self.elv + 0.5) - self.CST_R,
                 (self.flr - i) * self.HEIGHT - self.CST_R,
@@ -109,8 +109,8 @@ class UI:
         self.state: State
         font = {"font": ("Arial", 15)}
 
-        flr_o = OptionMenu(main_frame, flr, *range(self.MAX_FLR + 1))
-        elv_o = OptionMenu(main_frame, elv, *range(self.MAX_ELV + 1))
+        flr_o = OptionMenu(main_frame, flr, *range(1, self.MAX_FLR + 1))
+        elv_o = OptionMenu(main_frame, elv, *range(1, self.MAX_ELV + 1))
         flr_o.config(**font)
         elv_o.config(**font)
         flr_o.grid(row=0, column=1)
@@ -165,8 +165,4 @@ def draw_lines(w, elv, flr, cst, elv_locs):
     return w
 
 
-# root = Tk()
-# c = draw_lines(root, 4, 8, [1, 3, 5, 8, 0], [3, 5, 8, 0])
-# c.pack()
-# root.mainloop()
 UI()
